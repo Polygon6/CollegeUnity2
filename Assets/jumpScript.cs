@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class jumpScript : MonoBehaviour
 {
-    private int force = 25;
+    private float force = 0.4f;
     private int speed = 12;
+    private Rigidbody s;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        s = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.Space)) {
-            transform.position += Vector3.up * Time.deltaTime * force;
+            s.AddForce(Vector3.up * force);
         }
 
         if (Input.GetKey(KeyCode.W))
