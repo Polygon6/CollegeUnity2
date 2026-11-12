@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class jumpScript : MonoBehaviour
 {
-    private float force = 0.4f;
+    private float force = 4000;
     private int speed = 12;
+    private int push = 6;
     private Rigidbody s;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,7 +17,11 @@ public class jumpScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Space)) {
-            s.AddForce(Vector3.up * force);
+            s.AddForce(Vector3.up * force * Time.deltaTime);
+            print(Vector3.up * force * Time.deltaTime);
+            print(Vector3.up);
+            print(force);
+            print(Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -35,5 +40,10 @@ public class jumpScript : MonoBehaviour
         {
             transform.position += Vector3.left * Time.deltaTime * speed;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collision.transform.position += Vector3.down * Time.deltaTime * push;
     }
 }
